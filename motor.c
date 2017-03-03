@@ -34,7 +34,7 @@ void initMotors() {
 	}
 }
 
-void resetEncoders(void) {
+void resetEncoders() {
 	buf[0] = 16;												// Command register
 	buf[1] = 32;												// command to set decoders back to zero
 
@@ -44,7 +44,7 @@ void resetEncoders(void) {
 	}
 }
 
-long readRightEncoder (void) {
+long readRightEncoder() {
 
 	long encoder;
 
@@ -60,13 +60,13 @@ long readRightEncoder (void) {
 		exit(1);
 	}
 	else {
-		encoder = (buf[0] <<24) + (buf[1] << 16) + (buf[2] << 8) + buf[3];	// Put encoder values together
-		printf("Encoder : %08lX\n",encoder);
+		encoder = (buf[0] << 24) + (buf[1] << 16) + (buf[2] << 8) + buf[3];	// Put encoder values together
+		//printf("Encoder : %ld\n",encoder); // ou %08lX
 	}
 	return encoder;
 }
 
-long readLeftEncoder (void) {
+long readLeftEncoder() {
 
 	long encoder;
 
@@ -82,10 +82,22 @@ long readLeftEncoder (void) {
 		exit(1);
 	}
 	else {
-		encoder = (buf[4] <<24) + (buf[5] << 16) + (buf[6] << 8) + buf[7];
-		printf("Encoder 1: %08lX\n",encoder);
+		encoder = (buf[4] << 24) + (buf[5] << 16) + (buf[6] << 8) + buf[7];
+		//printf("Encoder 1: %ld\n",encoder); // ou %08lX
 	}
 	return encoder;
+}
+
+double readRightEncoderMilli(){
+	double val = readRightEncoder() / 1.56;
+	//printf("Right encoder %lf mm\n", val);
+	return val;
+}
+
+double readLeftEncoderMilli(){
+	double val = readLeftEncoder() / 1.56;
+	//printf("Left encoder %lf mm\n", val);
+	return val;
 }
 
 void driveRightMotor(int speed){
@@ -108,22 +120,18 @@ void driveLeftMotor(int speed){
 	}
 }
 
-void stopRightMotor(void){
-	buf[0] = 0;
-	buf[1] = 128;												// A speed of 128 stops the motor
-
-	if ((write(fd, buf, 2)) != 2) {
-		printf("Error writing to i2c slave\n");
-		exit(1);
-	}
+void stopMotors(){
+	driveRightMotor(128);												// A speed of 128 stops the motor
+	driveLeftMotor(128);
 }
 
-void stopLeftMotor(void){
-	buf[0] = 1;
-	buf[1] = 128;
+void translation(double mm){
 
-	if ((write(fd, buf, 2)) != 2) {
-		printf("Error writing to i2c slave\n");
-		exit(1);
-	}
+}
+
+void rotation(double degre) {
+	driveRightMotor(160);
+	driveLeftMotor(96);
+	usleep(1800000 * degre / 180);
+	stopMotors();
 }
