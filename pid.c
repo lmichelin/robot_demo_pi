@@ -3,8 +3,11 @@
 
 double previous_right_error = 0;
 double previous_left_error = 0;
+double previous_right_output = 128;
+double previous_left_output = 128;
 double right_integral = 0;
 double left_integral = 0;
+float max_var = 1.5; // max variation of output (acceleration)
 int dt = 5000; //µs
 float tolerance = 0.5; //mm
 float Kp = 0.5;
@@ -18,6 +21,9 @@ int updateRightPid(double setpoint, double measured_value)
   double derivative = (error - previous_right_error)/dt;
   previous_right_error = error;
   double output = Kp*error + Ki*right_integral + Kd*derivative + 128;
+  if (output > previous_right_output + max_var) output = previous_right_output + max_var;
+  else if (output < previous_right_output - max_var) output = previous_right_output - max_var;
+  previous_right_output = output;
   if (output < 0) return 0;
   else if (output > 254) return 254;
   else return output;
@@ -30,6 +36,9 @@ int updateLeftPid(double setpoint, double measured_value)
   double derivative = (error - previous_left_error)/dt;
   previous_left_error = error;
   double output = Kp*error + Ki*left_integral + Kd*derivative + 128;
+  if (output > previous_left_output + max_var) output = previous_left_output + max_var;
+  else if (output < previous_left_output - max_var) output = previous_left_output - max_var;
+  previous_left_output = output;
   if (output < 0) return 0;
   else if (output > 254) return 254;
   else return output;
@@ -56,5 +65,5 @@ void translate(float mm)
     //printf("right %f & left %f\n", current_right, current_left);
   }
 stopMotors();
-printf("end\n");
+printf("%lf %lf\n",readRightEncoderMilli(), readLeftEncoderMilli());
 }

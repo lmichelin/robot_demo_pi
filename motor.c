@@ -30,7 +30,7 @@ void initMotors() {
 		exit(1);
 	}
 	else {
-		printf("Software version: %u\n", buf[0]);
+		//printf("Software version: %u\n", buf[0]);
 	}
 }
 

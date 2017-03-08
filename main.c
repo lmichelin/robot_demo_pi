@@ -15,6 +15,7 @@ int main(int argc, char const *argv[]) {
   usleep(1000000);
 
   translate(500);
+  translate(-500);
 
   styloUp();
   usleep(1000000);
