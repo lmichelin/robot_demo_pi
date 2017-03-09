@@ -15,7 +15,7 @@ float max_acc = 1.3; // max variation of output (acceleration)
 float Kp = 0.4;
 float Ki = 0.1;
 float Kd = 0.3;
-float tolerance = 0.2; //mm
+float tolerance = 0.0; //mm
 
 int updateRightPid(double setpoint, double measured_value)
 {
@@ -106,4 +106,47 @@ void rotate(float degre)
   }
 stopMotors();
 //printf("END %lf %lf\n",current_right, current_left);
+}
+
+void courbe(float rayon, float degre)
+{
+  double rad = degre * 0.0174533; //conversion degre > radian
+  double current_right = readRightEncoderMilli();
+  double current_left = readLeftEncoderMilli();
+  double previous = current_right;
+  double wanted = 0;
+  double update = 0;
+  float coeff = (abs(rayon)-voie)/(abs(rayon)+voie);
+  previous_right_error = 0;
+  previous_left_error = 0;
+  right_integral = 0;
+
+  if (rayon * degre >= 0) {
+    if (rayon >= 0) wanted = current_right + (rayon+voie)*rad;
+    else wanted = current_right - (abs(rayon)+voie)*(-rad);
+    while (abs(current_right - wanted) > tolerance || abs(previous - wanted) > tolerance)
+    {
+      update = updateRightPid(wanted, current_right);
+      driveRightMotor(update);
+      driveLeftMotor((update-128)*coeff+128);
+      usleep(dt);
+      previous = current_right;
+      current_right = readRightEncoderMilli();
+    }
+  }
+  else {
+    if (rayon >= 0) wanted = current_left + (rayon+voie)*(-rad);
+    else wanted = current_left - (abs(rayon)+voie)*rad;
+    while (abs(current_left - wanted) > tolerance || abs(previous - wanted) > tolerance)
+    {
+      update = updateLeftPid(wanted, current_left);
+      driveLeftMotor(update);
+      driveRightMotor((update-128)*coeff+128);
+      usleep(dt);
+      previous = current_left;
+      current_left = readLeftEncoderMilli();
+    }
+  }
+
+stopMotors();
 }
