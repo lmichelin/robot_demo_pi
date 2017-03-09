@@ -124,14 +124,3 @@ void stopMotors(){
 	driveRightMotor(128);												// A speed of 128 stops the motor
 	driveLeftMotor(128);
 }
-
-void translation(double mm){
-
-}
-
-void rotation(double degre) {
-	driveRightMotor(160);
-	driveLeftMotor(96);
-	usleep(1800000 * degre / 180);
-	stopMotors();
-}

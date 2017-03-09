@@ -1,8 +1,10 @@
 #include "servo.h"
 #include "motor.h"
 #include "pid.h"
+#include "letters.h"
 
-int main(int argc, char const *argv[]) {
+int main(int argc, char const *argv[])
+{
 
   initMotors();
 
@@ -11,14 +13,7 @@ int main(int argc, char const *argv[]) {
   if (initServo() == -1)
       return -1 ;
 
-  styloUp();
-  usleep(1000000);
-
-  translate(500);
-  translate(-500);
-
-  styloUp();
-  usleep(1000000);
+  writeLetter('A');
   styloDetach();
 
   return 0;

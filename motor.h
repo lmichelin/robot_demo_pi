@@ -17,5 +17,3 @@ void driveRightMotor(int speed);										// Drive the motors forwards
 void driveLeftMotor(int speed);										// Drive the motors forwards
 void stopMotors();										// Stop the motors
 void initMotors();
-void rotation(double degre);
-void translation(double mm);
