@@ -5,7 +5,6 @@
 
 int main(int argc, char const *argv[])
 {
-
   initMotors();
 
   resetEncoders();
@@ -16,12 +15,12 @@ int main(int argc, char const *argv[])
   styloUp();
   usleep(500000);
 
-  writeLetter('E');
-  writeLetter('N');
-  writeLetter('S');
-  writeLetter('T');
-  writeLetter('A');
-  
+  int i = 0;
+  for (i = 0; i < strlen(argv[1]); i++)
+  {
+    writeLetter(argv[1][i]);
+  }
+
   styloDetach();
 
   return 0;
