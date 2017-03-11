@@ -21,6 +21,8 @@ int main(int argc, char const *argv[])
     writeLetter(argv[1][i]);
   }
 
+  writeLetter(' ');
+
   styloDetach();
 
   return 0;
