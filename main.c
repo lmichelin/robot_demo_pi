@@ -16,12 +16,15 @@ int main(int argc, char const *argv[])
   usleep(500000);
 
   int i = 0;
-  for (i = 0; i < strlen(argv[1]); i++)
-  {
-    writeLetter(argv[1][i]);
+  int j = 0;
+  for (i = 1; i < argc; i++) {
+    for (j = 0; j < strlen(argv[i]); j++)
+    {
+      writeLetter(argv[i][j]);
+    }
+    writeLetter(' ');
   }
 
-  writeLetter(' ');
 
   styloDetach();
 

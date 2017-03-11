@@ -9,7 +9,7 @@
 
 <BODY BACKGROUND="background.jpg">
 
-<body>
+<body onload="document.getElementById('phrase').focus()">
   <div class="text-center d-flex h-100 align-items-center">
     <div class="container">
       <div class="row">
@@ -17,25 +17,19 @@
       </div>
       <div class="row">
         <div class="col-lg-12">
-
           <h1 class="display-4 text-white">Que voulez-vous que j'écrive ?</h1>
           <div class="col-md-12">
-            <form class="">
-              <div class="form-group">
-                <input class="form-control" placeholder="Votre phrase...">
-              </div>
-              <button type="submit" class="btn btn-success">Valider !</button>
-            </form>
+            <div class="form-group">
+              <input id="phrase" class="form-control" onkeypress="if (event.keyCode==13) action();" placeholder="Votre phrase...">
+            </div>
+            <button onclick="action()" class="btn btn-success">Action !!</button>
           </div>
-
-
-
         </div>
       </div>
     </div>
   </div>
 
-<script type="text/javascript" src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 

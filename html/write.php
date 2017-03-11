@@ -1,14 +1,10 @@
 <?php
 
-//On recupere la donnee
-$accel = $_GET["accel"];
+$phrase = $_GET["phrase"];
 
-//Si les valeurs existent alors...
-if ( isset($accel) ){
-
-    exec("sudo main.x $accel");
-
+if ( isset($phrase) ){
+    exec("/home/pi/robot_demo_pi/write.sh $phrase");
 }
-//Si on a pas pu utiliser ce qui a ete recu
+
 else { echo ("fail"); }
 ?>
