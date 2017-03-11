@@ -12,124 +12,124 @@ void writeLetter(char letter)
       translate(5*letter_size);
       break;
     }
-    case 'A':
+    case 'A': case 'a':
     {
       rotate(-60);
       styloDown();
-      usleep(500000);
+      usleep(400000);
       translate(11.547*letter_size);
       rotate(-60);
       translate(-11.547*letter_size);
       styloUp();
-      usleep(500000);
+      usleep(400000);
       translate(5.7735*letter_size);
       rotate(-60);
       styloDown();
-      usleep(500000);
+      usleep(400000);
       translate(5.7735*letter_size);
       styloUp();
-      usleep(500000);
+      usleep(400000);
       rotate(90);
       translate(-5*letter_size);
       rotate(90);
       translate(11.16*letter_size);
       break;
     }
-    case 'B':
+    case 'B': case 'b':
     {
       rotate(-90);
       styloDown();
-      usleep(500000);
+      usleep(400000);
       translate(10*letter_size);
       rotate(90);
       courbe(2.5*letter_size,180);
       courbe(-2.5*letter_size,180);
       styloUp();
-      usleep(500000);
+      usleep(400000);
       translate(5*letter_size);
       break;
     }
-    case 'C':
+    case 'C': case 'c':
     {
       rotate(-90);
       translate(10*letter_size);
       rotate(-90);
       translate(-5*letter_size);
       styloDown();
-      usleep(500000);
+      usleep(400000);
       courbe(5*letter_size,-180);
       styloUp();
-      usleep(500000);
+      usleep(400000);
       translate(2.5*letter_size);
       break;
     }
-    case 'D':
+    case 'D': case 'd':
     {
       rotate(-90);
       styloDown();
-      usleep(500000);
+      usleep(400000);
       translate(10*letter_size);
       rotate(-90);
       courbe(-5*letter_size,180);
       styloUp();
-      usleep(500000);
+      usleep(400000);
       translate(7.5*letter_size);
       break;
     }
-    case 'E':
+    case 'E': case 'e':
     {
       rotate(-90);
       styloDown();
-      usleep(500000);
+      usleep(400000);
       translate(10*letter_size);
       rotate(90);
       translate(5*letter_size);
       styloUp();
-      usleep(500000);
+      usleep(400000);
       rotate(-90);
       translate(-5*letter_size);
       rotate(90);
       styloDown();
-      usleep(500000);
+      usleep(400000);
       translate(-5*letter_size);
       styloUp();
-      usleep(500000);
+      usleep(400000);
       rotate(-90);
       translate(-5*letter_size);
       rotate(90);
       styloDown();
-      usleep(500000);
+      usleep(400000);
       translate(5*letter_size);
       styloUp();
-      usleep(500000);
+      usleep(400000);
       translate(2.5*letter_size);
       break;
     }
-    case 'F':
+    case 'F': case 'f':
     {
       rotate(-90);
       styloDown();
-      usleep(500000);
+      usleep(400000);
       translate(10*letter_size);
       rotate(90);
       translate(5*letter_size);
       styloUp();
-      usleep(500000);
+      usleep(400000);
       rotate(-90);
       translate(-5*letter_size);
       rotate(90);
       styloDown();
-      usleep(500000);
+      usleep(400000);
       translate(-5*letter_size);
       styloUp();
-      usleep(500000);
+      usleep(400000);
       rotate(-90);
       translate(-5*letter_size);
       rotate(90);
       translate(7.5*letter_size);
       break;
     }
-    case 'G':
+    case 'G': case 'g':
     {
       translate(5*letter_size);
       styloDown();
@@ -152,52 +152,78 @@ void writeLetter(char letter)
       translate(2.5*letter_size);
       break;
     }
-    case 'N':
+    case 'H': case 'h':
     {
       rotate(-90);
       styloDown();
-      usleep(500000);
+      usleep(400000);
+      translate(10*letter_size);
+      styloUp();
+      usleep(400000);
+      translate(-5*letter_size);
+      rotate(90);
+      styloDown();
+      usleep(400000);
+      translate(5*letter_size);
+      styloUp();
+      usleep(400000);
+      rotate(-90);
+      translate(5*letter_size);
+      styloDown();
+      usleep(400000);
+      translate(-10*letter_size);
+      styloUp();
+      usleep(400000);
+      rotate(90);
+      translate(2.5*letter_size);
+      break;
+    }
+    case 'N': case 'n':
+    {
+      rotate(-90);
+      styloDown();
+      usleep(400000);
       translate(10*letter_size);
       rotate(-30);
       translate(-11.547*letter_size);
       rotate(30);
       translate(10*letter_size);
       styloUp();
-      usleep(500000);
+      usleep(400000);
       translate(-10*letter_size);
       rotate(90);
       translate(2.5*letter_size);
       break;
     }
-    case 'S':
+    case 'S': case 's':
     {
       styloDown();
-      usleep(500000);
+      usleep(400000);
       courbe(2.5*letter_size,-180);
       courbe(2.5*letter_size,180);
       styloUp();
-      usleep(500000);
+      usleep(400000);
       translate(2.5*letter_size);
       rotate(-90);
       translate(-10*letter_size);
       break;
     }
-    case 'T':
+    case 'T': case 't':
     {
       translate(10*letter_size);
       rotate(90);
       styloDown();
-      usleep(500000);
+      usleep(400000);
       translate(5*letter_size);
       styloUp();
-      usleep(500000);
+      usleep(400000);
       translate(-2.5*letter_size);
       rotate(-90);
       styloDown();
-      usleep(500000);
+      usleep(400000);
       translate(-10*letter_size);
       styloUp();
-      usleep(500000);
+      usleep(400000);
       rotate(-90);
       translate(-5*letter_size);
       rotate(90);
