@@ -1,10 +1,7 @@
 <?php
 
-$phrase = $_GET["phrase"];
+$params = $_GET["params"];
 
-if ( isset($phrase) ){
-    exec("/home/pi/robot_demo_pi/write.sh $phrase");
-}
+if ( isset($params) ) exec("/home/pi/robot_demo_pi/write.sh $params");
 
-else { echo ("fail"); }
 ?>

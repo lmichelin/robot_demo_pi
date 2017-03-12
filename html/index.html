@@ -5,24 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href="bootstrap-4.0.0-alpha.6.css" rel="stylesheet" type="text/css">
+  <title>ENSTAR - Robot de démonstration</title>
 </head>
 
-<BODY BACKGROUND="background.jpg">
-
-<body onload="document.getElementById('phrase').focus()">
+<body background="background.jpg" onload="document.getElementById('phrase').focus()">
   <div class="text-center d-flex h-100 align-items-center">
     <div class="container">
       <div class="row">
-        <div class="col-md-12"><img class="center-block img-fluid d-block w-50 mx-auto" src="logo-enstar.png"></div>
+        <div class="col-md-12"><img class="img-fluid mx-auto" src="logo-enstar.png"></div>
       </div>
       <div class="row">
         <div class="col-lg-12">
-          <h1 class="display-4 text-white">Que voulez-vous que j'écrive ?</h1>
+          <h1 class="display-4 text-white">Que voulez-vous que j’écrive ?</h1>
           <div class="col-md-12">
             <div class="form-group">
               <input id="phrase" class="form-control" onkeypress="if (event.keyCode==13) action();" placeholder="Votre phrase...">
             </div>
-            <button onclick="action()" class="btn btn-success">Action !!</button>
+            <div class="form-group">
+              <label for="ex1">Hauteur du texte (cm) :</label>
+              <input id="taille" style='width: 200px; margin: auto;' type='number' class="form-control" onkeypress="if (event.keyCode==13) action();" value="10" placeholder="Hauteur du texte (cm)">
+            </div>
+            <div class="btn-group-lg">
+              <button onclick="action()" class="btn btn-success">Action !!</button>
+            </div>
           </div>
         </div>
       </div>
