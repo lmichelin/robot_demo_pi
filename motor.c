@@ -100,6 +100,23 @@ double readLeftEncoderMilli(){
 	return val;
 }
 
+float readBatteryVoltage(){
+	buf[0] = 10;												// This is the register we wish to read battery voltage from
+
+	if ((write(fd, buf, 1)) != 1) {								// Send regiter to read software from from
+		printf("Error writing to i2c slave\n");
+		exit(1);
+	}
+
+	if (read(fd, buf, 1) != 1) {								// Read back data into buf[]
+		printf("Unable to read from slave\n");
+		exit(1);
+	}
+	else {
+		return (float)buf[0]/10;
+	}
+}
+
 void driveRightMotor(int speed){
 	buf[0] = 0;													// Register to set speed of motor 1
 	buf[1] = speed;												// speed to be set

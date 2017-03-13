@@ -8,7 +8,7 @@
   <title>ENSTAR - Robot de démonstration</title>
 </head>
 
-<body background="background.jpg" onload="document.getElementById('phrase').focus()">
+<body background="background.jpg" onload="document.getElementById('phrase').focus(); batteryUpdate()">
   <div class="text-center d-flex h-100 align-items-center">
     <div class="container">
       <div class="row">
@@ -25,9 +25,8 @@
               <label for="ex1">Hauteur du texte (cm) :</label>
               <input id="taille" style='width: 200px; margin: auto;' type='number' class="form-control" onkeypress="if (event.keyCode==13) action();" value="10" placeholder="Hauteur du texte (cm)">
             </div>
-            <div class="btn-group-lg">
-              <button onclick="action()" class="btn btn-success">Action !!</button>
-            </div>
+            <p><button onclick="action()" class="btn btn-success btn-lg">Action !!</button></p>
+            Tension de la batterie : <strong id="battery"></strong> Volts <button onclick="batteryUpdate()" class="btn btn-sm">Actualiser</button>
           </div>
         </div>
       </div>

@@ -7,3 +7,16 @@ function action(){
   document.getElementById("phrase").value = "";
   document.getElementById("phrase").focus();
 }
+
+function batteryUpdate(){
+  document.getElementById("battery").innerHTML = "";
+  var battery = new XMLHttpRequest();
+  battery.onreadystatechange = function() {
+    if (battery.readyState == 4) {
+      document.getElementById("battery").innerHTML = battery.response;
+    }
+  }
+  battery.open("GET", "battery.php");
+  battery.send(null);
+  document.getElementById("phrase").focus();
+}

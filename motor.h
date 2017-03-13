@@ -13,6 +13,7 @@ long readLeftEncoder();								// Reads encoder data for both motors and display
 double readRightEncoderMilli();								// Reads encoder data for both motors and displays to the screen
 double readLeftEncoderMilli();								// Reads encoder data for both motors and displays to the screen
 void resetEncoders();									// Resets the encoders to 0
+float readBatteryVoltage();
 void driveRightMotor(int speed);										// Drive the motors forwards
 void driveLeftMotor(int speed);										// Drive the motors forwards
 void stopMotors();										// Stop the motors

@@ -24,7 +24,6 @@ int main(int argc, char const *argv[])
 
   int i = 0;
   int j = 0;
-  printf("%d\n", argc);
   for (i = 2; i < argc; i++)
   {
     for (j = 0; j < strlen(argv[i]); j++)
