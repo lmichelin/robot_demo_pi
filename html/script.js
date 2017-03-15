@@ -2,6 +2,11 @@ function action(){
   var phrase = document.getElementById("phrase").value;
   var taille = document.getElementById("taille").value;
   var request = new XMLHttpRequest();
+  request.onreadystatechange = function() {
+    if (request.readyState == 4) {
+      batteryUpdate();
+    }
+  }
 	request.open("GET", "write.php?params=" + taille + " " + phrase);
 	request.send(null);
   document.getElementById("phrase").value = "";
