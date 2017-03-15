@@ -5,3 +5,4 @@ int updateLeftPid(double setpoint, double measured_value);
 void translate(float mm);
 void rotate(float degre);
 void courbe(float rayon, float degre);
+double round(double value);

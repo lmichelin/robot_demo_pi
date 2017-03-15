@@ -1,7 +1,17 @@
 #include "pid.h"
 #include "motor.h"
+#include <math.h>
 
-float voie = 109; //voie/2 du robot (voie = distance entre les 2 roues d'un même essieu) en mm
+#define voie 111.5 //voie/2 du robot (voie = distance entre les 2 roues d'un même essieu) en mm
+
+#define dt 5000 //µs
+#define max_vit 180 // vitesse max comprise entre 128 et 254
+#define max_int 40 // max integral value
+#define max_acc 1 // max variation of output (acceleration)
+#define Kp 0.4
+#define Ki 0.1
+#define Kd 0.3
+#define tolerance 0.0 //mm
 
 double previous_right_error = 0;
 double previous_left_error = 0;
@@ -9,14 +19,6 @@ double previous_right_output = 128;
 double previous_left_output = 128;
 double right_integral = 0;
 double left_integral = 0;
-
-int dt = 5000; //µs
-float max_int = 40; // max integral value
-float max_acc = 1.3; // max variation of output (acceleration)
-float Kp = 0.4;
-float Ki = 0.1;
-float Kd = 0.3;
-float tolerance = 0.0; //mm
 
 int updateRightPid(double setpoint, double measured_value)
 {
@@ -30,8 +32,8 @@ int updateRightPid(double setpoint, double measured_value)
   if (output > previous_right_output + max_acc) output = previous_right_output + max_acc;
   else if (output < previous_right_output - max_acc) output = previous_right_output - max_acc;
   previous_right_output = output;
-  if (output < 0) return 0;
-  else if (output > 254) return 254;
+  if (output < 256 - max_vit) return 256 - max_vit;
+  else if (output > max_vit) return max_vit;
   else return output;
 }
 
@@ -47,8 +49,8 @@ int updateLeftPid(double setpoint, double measured_value)
   if (output > previous_left_output + max_acc) output = previous_left_output + max_acc;
   else if (output < previous_left_output - max_acc) output = previous_left_output - max_acc;
   previous_left_output = output;
-  if (output < 0) return 0;
-  else if (output > 254) return 254;
+  if (output < 256 - max_vit) return 256 - max_vit;
+  else if (output > max_vit) return max_vit;
   else return output;
 }
 
@@ -69,8 +71,10 @@ void translate(float mm)
     usleep(dt);
     previous_left = current_left;
     current_left = readLeftEncoderMilli();
+    //printf("right %lf & left %lf\n", current_right, current_left);
   }
 stopMotors();
+//printf("END %lf %lf\n",current_right, current_left);
 }
 
 void rotate(float degre)
@@ -86,7 +90,7 @@ void rotate(float degre)
   while (abs(current_left - wanted_left) > tolerance || abs(previous_left - wanted_left) > tolerance)
   {
     update = updateLeftPid(wanted_left, current_left);
-    driveRightMotor(update);
+    driveRightMotor(256 - update);
     driveLeftMotor(update);
     usleep(dt);
     previous_left = current_left;
@@ -105,6 +109,7 @@ void courbe(float rayon, float degre)
   double previous = current_left;
   double wanted = 0;
   double update = 0;
+  double update2 = 0;
   float coeff = (abs(rayon)-voie)/(abs(rayon)+voie);
   previous_right_error = 0;
   previous_left_error = 0;
@@ -117,8 +122,9 @@ void courbe(float rayon, float degre)
     while (abs(current_right - wanted) > tolerance || abs(previous - wanted) > tolerance)
     {
       update = updateRightPid(wanted, current_right);
+      update2 = round((update-128)*coeff+128);
       driveRightMotor(update);
-      driveLeftMotor((update-128)*coeff+128);
+      driveLeftMotor(update2);
       usleep(dt);
       previous = current_right;
       current_right = readRightEncoderMilli();
@@ -130,8 +136,9 @@ void courbe(float rayon, float degre)
     while (abs(current_left - wanted) > tolerance || abs(previous - wanted) > tolerance)
     {
       update = updateLeftPid(wanted, current_left);
+      update2 = round((update-128)*coeff+128);
       driveLeftMotor(update);
-      driveRightMotor((update-128)*coeff+128);
+      driveRightMotor(update2);
       usleep(dt);
       previous = current_left;
       current_left = readLeftEncoderMilli();
@@ -139,4 +146,8 @@ void courbe(float rayon, float degre)
   }
 
 stopMotors();
+}
+
+double round(double value) {
+     return floor(value + 0.5);
 }
