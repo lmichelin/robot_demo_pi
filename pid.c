@@ -9,6 +9,7 @@ double previous_right_output = 128;
 double previous_left_output = 128;
 double right_integral = 0;
 double left_integral = 0;
+
 int dt = 5000; //µs
 float max_int = 40; // max integral value
 float max_acc = 1.3; // max variation of output (acceleration)
@@ -53,54 +54,42 @@ int updateLeftPid(double setpoint, double measured_value)
 
 void translate(float mm)
 {
-  double current_right = readRightEncoderMilli();
+  double update = 0;
   double current_left = readLeftEncoderMilli();
-  double previous_right = current_right;
   double previous_left = current_left;
-  double wanted_right = current_right + mm;
   double wanted_left = current_left + mm;
-  previous_right_error = 0;
   previous_left_error = 0;
-  right_integral = 0;
   left_integral = 0;
 
-  while (abs(current_right - wanted_right) > tolerance || abs(current_left - wanted_left) > tolerance || abs(previous_right - wanted_right) > tolerance || abs(previous_left - wanted_left) > tolerance)
+  while (abs(current_left - wanted_left) > tolerance || abs(previous_left - wanted_left) > tolerance)
   {
-    driveRightMotor(updateRightPid(wanted_right, current_right));
-    driveLeftMotor(updateLeftPid(wanted_left, current_left));
+    update = updateLeftPid(wanted_left, current_left);
+    driveRightMotor(update);
+    driveLeftMotor(update);
     usleep(dt);
-    previous_right = current_right;
     previous_left = current_left;
-    current_right = readRightEncoderMilli();
     current_left = readLeftEncoderMilli();
-    //printf("right %lf & left %lf\n", current_right, current_left);
   }
 stopMotors();
-//printf("END %lf %lf\n",current_right, current_left);
 }
 
 void rotate(float degre)
 {
+  double update = 0;
   double rad = degre * 0.0174533; //conversion degre > radian
-  double current_right = readRightEncoderMilli();
   double current_left = readLeftEncoderMilli();
-  double previous_right = current_right;
   double previous_left = current_left;
-  double wanted_right = current_right + voie*rad;
   double wanted_left = current_left - voie*rad;
-  previous_right_error = 0;
   previous_left_error = 0;
-  right_integral = 0;
   left_integral = 0;
 
-  while (abs(current_right - wanted_right) > tolerance || abs(current_left - wanted_left) > tolerance || abs(previous_right - wanted_right) > tolerance || abs(previous_left - wanted_left) > tolerance)
+  while (abs(current_left - wanted_left) > tolerance || abs(previous_left - wanted_left) > tolerance)
   {
-    driveRightMotor(updateRightPid(wanted_right, current_right));
-    driveLeftMotor(updateLeftPid(wanted_left, current_left));
+    update = updateLeftPid(wanted_left, current_left);
+    driveRightMotor(update);
+    driveLeftMotor(update);
     usleep(dt);
-    previous_right = current_right;
     previous_left = current_left;
-    current_right = readRightEncoderMilli();
     current_left = readLeftEncoderMilli();
     //printf("right %lf & left %lf\n", current_right, current_left);
   }
@@ -113,13 +102,14 @@ void courbe(float rayon, float degre)
   double rad = degre * 0.0174533; //conversion degre > radian
   double current_right = readRightEncoderMilli();
   double current_left = readLeftEncoderMilli();
-  double previous = current_right;
+  double previous = current_left;
   double wanted = 0;
   double update = 0;
   float coeff = (abs(rayon)-voie)/(abs(rayon)+voie);
   previous_right_error = 0;
   previous_left_error = 0;
   right_integral = 0;
+  left_integral = 0;
 
   if (rayon * degre >= 0) {
     if (rayon >= 0) wanted = current_right + (rayon+voie)*rad;
