@@ -10,6 +10,22 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
       translate(5*letter_size);
       break;
     }
+    case '-':
+    {
+      rotate(-90);
+      translate(5*letter_size);
+      rotate(90);
+      styloDown();
+      usleep(400000);
+      translate(5*letter_size);
+      styloUp();
+      usleep(400000);
+      translate(2.5*letter_size);
+      rotate(-90);
+      translate(-5*letter_size);
+      rotate(90);
+      break;
+    }
     case 'A': case 'a':
     {
       rotate(-60);
