@@ -33,7 +33,5 @@ int main(int argc, char const *argv[])
     writeLetter(' ', letter_size);
   }
 
-  styloDetach();
-
   return 0;
 }

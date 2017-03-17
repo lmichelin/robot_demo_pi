@@ -2,7 +2,6 @@
 #include <wiringPi.h> // Include WiringPi library!
 #include <unistd.h>
 
+int initServo();
 void styloUp();
 void styloDown();
-void styloDetach();
-int initServo();

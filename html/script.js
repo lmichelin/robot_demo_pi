@@ -1,4 +1,5 @@
 function action(){
+  playtext("à vos ordres, c’est parti !");
   var phrase = document.getElementById("phrase").value;
   var taille = document.getElementById("taille").value;
   var request = new XMLHttpRequest();
@@ -8,9 +9,10 @@ function action(){
         document.getElementById("buttonAction").className = "btn btn-success btn-lg";
         document.getElementById("buttonAction").innerHTML = "Action !!";
         batteryUpdate();
+        playsound("tada.mp3");
       }
     }
-  	request.open("GET", "write.php?params=" + taille + " " + phrase);
+  	request.open("GET", "script.php?letters=" + taille + " " + phrase);
   	request.send(null);
     document.getElementById("buttonAction").className = "btn btn-danger btn-lg";
     document.getElementById("buttonAction").innerHTML = "Stop";
@@ -18,13 +20,11 @@ function action(){
     document.getElementById("phrase").focus();
   }
   else if (document.getElementById("buttonAction").innerHTML == "Stop") {
-  	request.open("GET", "stop.php");
+  	request.open("GET", "script.php?stop");
   	request.send(null);
     document.getElementById("phrase").value = "";
     document.getElementById("phrase").focus();
   }
-
-
 }
 
 function batteryUpdate(){
@@ -35,7 +35,7 @@ function batteryUpdate(){
       document.getElementById("battery").innerHTML = battery.response;
     }
   }
-  battery.open("GET", "battery.php");
+  battery.open("GET", "script.php?battery");
   battery.send(null);
   document.getElementById("phrase").focus();
 }
@@ -45,7 +45,21 @@ function shutdown(){
   {
     document.getElementById("shutdownButton").innerHTML = "Ordre d'arrêt envoyé, arrêt en cours...";
     var request = new XMLHttpRequest();
-    request.open("GET", "arret.php");
+    request.open("GET", "script.php?arret");
   	request.send(null);
   }
+}
+
+function playtext(text)
+{
+  var request = new XMLHttpRequest();
+  request.open("GET", "script.php?text=" + text);
+  request.send(null);
+}
+
+function playsound(sound)
+{
+  var request = new XMLHttpRequest();
+  request.open("GET", "script.php?sound=" + sound);
+  request.send(null);
 }

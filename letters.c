@@ -16,10 +16,8 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
       translate(5*letter_size);
       rotate(90);
       styloDown();
-      usleep(400000);
       translate(5*letter_size);
       styloUp();
-      usleep(400000);
       translate(2.5*letter_size);
       rotate(-90);
       translate(-5*letter_size);
@@ -29,9 +27,7 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     case '.':
     {
       styloDown();
-      usleep(400000);
       styloUp();
-      usleep(400000);
       translate(2.5*letter_size);
       break;
     }
@@ -39,19 +35,15 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     {
       rotate(-60);
       styloDown();
-      usleep(400000);
       translate(11.547*letter_size);
       rotate(-60);
       translate(-11.547*letter_size);
       styloUp();
-      usleep(400000);
       translate(5.7735*letter_size);
       rotate(-60);
       styloDown();
-      usleep(400000);
       translate(5.7735*letter_size);
       styloUp();
-      usleep(400000);
       rotate(90);
       translate(-5*letter_size);
       rotate(90);
@@ -62,13 +54,11 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     {
       rotate(-90);
       styloDown();
-      usleep(400000);
       translate(10*letter_size);
       rotate(90);
       courbe(2.5*letter_size,180);
       courbe(-2.5*letter_size,180);
       styloUp();
-      usleep(400000);
       translate(5*letter_size);
       break;
     }
@@ -79,10 +69,8 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
       rotate(-90);
       translate(-5*letter_size);
       styloDown();
-      usleep(400000);
       courbe(5*letter_size,-180);
       styloUp();
-      usleep(400000);
       translate(2.5*letter_size);
       break;
     }
@@ -90,12 +78,10 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     {
       rotate(-90);
       styloDown();
-      usleep(400000);
       translate(10*letter_size);
       rotate(-90);
       courbe(-5*letter_size,180);
       styloUp();
-      usleep(400000);
       translate(7.5*letter_size);
       break;
     }
@@ -103,28 +89,22 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     {
       rotate(-90);
       styloDown();
-      usleep(400000);
       translate(10*letter_size);
       rotate(90);
       translate(5*letter_size);
       styloUp();
-      usleep(400000);
       rotate(-90);
       translate(-5*letter_size);
       rotate(90);
       styloDown();
-      usleep(400000);
       translate(-5*letter_size);
       styloUp();
-      usleep(400000);
       rotate(-90);
       translate(-5*letter_size);
       rotate(90);
       styloDown();
-      usleep(400000);
       translate(5*letter_size);
       styloUp();
-      usleep(400000);
       translate(2.5*letter_size);
       break;
     }
@@ -132,20 +112,16 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     {
       rotate(-90);
       styloDown();
-      usleep(400000);
       translate(10*letter_size);
       rotate(90);
       translate(5*letter_size);
       styloUp();
-      usleep(400000);
       rotate(-90);
       translate(-5*letter_size);
       rotate(90);
       styloDown();
-      usleep(400000);
       translate(-5*letter_size);
       styloUp();
-      usleep(400000);
       rotate(-90);
       translate(-5*letter_size);
       rotate(90);
@@ -156,21 +132,17 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     {
       translate(5*letter_size);
       styloDown();
-      usleep(500000);
       courbe(-5*letter_size,180);
       styloUp();
-      usleep(500000);
       translate(2.5*letter_size);
       rotate(90);
       translate(-5*letter_size);
       rotate(-90);
       styloDown();
-      usleep(500000);
       translate(-2.5*letter_size);
       rotate(90);
       translate(-5*letter_size);
       styloUp();
-      usleep(500000);
       rotate(90);
       translate(2.5*letter_size);
       break;
@@ -179,24 +151,18 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     {
       rotate(-90);
       styloDown();
-      usleep(400000);
       translate(10*letter_size);
       styloUp();
-      usleep(400000);
       translate(-5*letter_size);
       rotate(90);
       styloDown();
-      usleep(400000);
       translate(5*letter_size);
       styloUp();
-      usleep(400000);
       rotate(-90);
       translate(5*letter_size);
       styloDown();
-      usleep(400000);
       translate(-10*letter_size);
       styloUp();
-      usleep(400000);
       rotate(90);
       translate(2.5*letter_size);
       break;
@@ -207,24 +173,18 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
       translate(10*letter_size);
       rotate(90);
       styloDown();
-      usleep(400000);
       translate(5*letter_size);
       styloUp();
-      usleep(400000);
       translate(-2.5*letter_size);
       rotate(-90);
       styloDown();
-      usleep(400000);
       translate(-10*letter_size);
       styloUp();
-      usleep(400000);
       rotate(90);
       translate(-2.5*letter_size);
       styloDown();
-      usleep(400000);
       translate(5*letter_size);
       styloUp();
-      usleep(400000);
       translate(2.5*letter_size);
       break;
     }
@@ -234,18 +194,14 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
       translate(10*letter_size);
       rotate(90);
       styloDown();
-      usleep(400000);
       translate(5*letter_size);
       styloUp();
-      usleep(400000);
       translate(-2.5*letter_size);
       rotate(-90);
       styloDown();
-      usleep(400000);
       translate(-7.5*letter_size);
       courbe(-2.5*letter_size,90);
       styloUp();
-      usleep(400000);
       translate(7.5*letter_size);
       break;
     }
@@ -253,24 +209,18 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     {
       rotate(-90);
       styloDown();
-      usleep(400000);
       translate(10*letter_size);
       styloUp();
-      usleep(400000);
       translate(-5*letter_size);
       rotate(30);
       styloDown();
-      usleep(400000);
       translate(5.7735*letter_size);
       styloUp();
-      usleep(400000);
       translate(-5.7735*letter_size);
       rotate(-60);
       styloDown();
-      usleep(400000);
       translate(-5.7735*letter_size);
       styloUp();
-      usleep(400000);
       rotate(120);
       translate(2.5*letter_size);
       break;
@@ -280,12 +230,10 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
       rotate(-90);
       translate(10*letter_size);
       styloDown();
-      usleep(400000);
       translate(-10*letter_size);
       rotate(90);
       translate(5*letter_size);
       styloUp();
-      usleep(400000);
       translate(2.5*letter_size);
       break;
     }
@@ -293,7 +241,6 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     {
       rotate(-90);
       styloDown();
-      usleep(400000);
       translate(10*letter_size);
       rotate(-30);
       translate(-5.7735*letter_size);
@@ -302,7 +249,6 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
       rotate(-30);
       translate(-10*letter_size);
       styloUp();
-      usleep(400000);
       rotate(90);
       translate(2.5*letter_size);
       break;
@@ -311,14 +257,12 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     {
       rotate(-90);
       styloDown();
-      usleep(400000);
       translate(10*letter_size);
       rotate(-30);
       translate(-11.547*letter_size);
       rotate(30);
       translate(10*letter_size);
       styloUp();
-      usleep(400000);
       translate(-10*letter_size);
       rotate(90);
       translate(2.5*letter_size);
@@ -328,10 +272,8 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     {
       translate(5*letter_size);
       styloDown();
-      usleep(400000);
       courbe(5*letter_size,-360);
       styloUp();
-      usleep(400000);
       translate(7.5*letter_size);
       break;
     }
@@ -341,12 +283,10 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
       translate(5*letter_size);
       rotate(90);
       styloDown();
-      usleep(400000);
       courbe(2.5*letter_size,-180);
       rotate(90);
       translate(-10*letter_size);
       styloUp();
-      usleep(400000);
       rotate(90);
       translate(7.5*letter_size);
       break;
@@ -355,17 +295,13 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     {
       translate(5*letter_size);
       styloDown();
-      usleep(400000);
       courbe(5*letter_size,-360);
       styloUp();
-      usleep(400000);
       translate(5*letter_size);
       rotate(45);
       styloDown();
-      usleep(400000);
       translate(-5*letter_size);
       styloUp();
-      usleep(400000);
       translate(5*letter_size);
       rotate(-45);
       translate(2.5*letter_size);
@@ -375,14 +311,12 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     {
       rotate(-90);
       styloDown();
-      usleep(400000);
       translate(10*letter_size);
       rotate(-90);
       courbe(-2.5*letter_size,180);
       rotate(63.435);
       translate(5.59*letter_size);
       styloUp();
-      usleep(400000);
       rotate(-63.43);
       translate(2.5*letter_size);
       break;
@@ -390,11 +324,9 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     case 'S': case 's':
     {
       styloDown();
-      usleep(400000);
       courbe(2.5*letter_size,-180);
       courbe(2.5*letter_size,180);
       styloUp();
-      usleep(400000);
       translate(2.5*letter_size);
       rotate(-90);
       translate(-10*letter_size);
@@ -407,17 +339,13 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
       translate(10*letter_size);
       rotate(90);
       styloDown();
-      usleep(400000);
       translate(5*letter_size);
       styloUp();
-      usleep(400000);
       translate(-2.5*letter_size);
       rotate(-90);
       styloDown();
-      usleep(400000);
       translate(-10*letter_size);
       styloUp();
-      usleep(400000);
       rotate(90);
       translate(5*letter_size);
       break;
@@ -427,12 +355,10 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
       rotate(90);
       translate(-10*letter_size);
       styloDown();
-      usleep(400000);
       translate(7.5*letter_size);
       courbe(2.5*letter_size,-180);
       translate(7.5*letter_size);
       styloUp();
-      usleep(400000);
       translate(-10*letter_size);
       rotate(90);
       translate(2.5*letter_size);
@@ -444,12 +370,10 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
       translate(10*letter_size);
       rotate(-30);
       styloDown();
-      usleep(400000);
       translate(-11.547*letter_size);
       rotate(60);
       translate(11.547*letter_size);
       styloUp();
-      usleep(400000);
       rotate(-30);
       translate(-10*letter_size);
       rotate(90);
@@ -462,7 +386,6 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
       translate(10*letter_size);
       rotate(-30);
       styloDown();
-      usleep(400000);
       translate(-11.547*letter_size);
       rotate(60);
       translate(5.7735*letter_size);
@@ -471,7 +394,6 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
       rotate(60);
       translate(11.547*letter_size);
       styloUp();
-      usleep(400000);
       rotate(-30);
       translate(-10*letter_size);
       rotate(90);
@@ -482,18 +404,14 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     {
       rotate(-60);
       styloDown();
-      usleep(400000);
       translate(11.547*letter_size);
       styloUp();
-      usleep(400000);
       translate(-5.7735*letter_size);
       rotate(-60);
       translate(5.7735*letter_size);
       styloDown();
-      usleep(400000);
       translate(-11.547*letter_size);
       styloUp();
-      usleep(400000);
       rotate(120);
       translate(2.5*letter_size);
       break;
@@ -502,17 +420,13 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     {
       rotate(-60);
       styloDown();
-      usleep(400000);
       translate(11.547*letter_size);
       styloUp();
-      usleep(400000);
       translate(-5.7735*letter_size);
       rotate(-60);
       styloDown();
-      usleep(400000);
       translate(5.7735*letter_size);
       styloUp();
-      usleep(400000);
       translate(-11.547*letter_size);
       rotate(120);
       translate(2.5*letter_size);
@@ -524,14 +438,12 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
       translate(10*letter_size);
       rotate(90);
       styloDown();
-      usleep(400000);
       translate(5*letter_size);
       rotate(-60);
       translate(-11.547*letter_size);
       rotate(60);
       translate(5*letter_size);
       styloUp();
-      usleep(400000);
       translate(2.5*letter_size);
       break;
     }

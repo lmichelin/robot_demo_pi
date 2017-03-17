@@ -1,7 +1,7 @@
 #include "servo.h"
 
 // Pin number declarations. We're using the Broadcom chip pin numbers.
-const int pwmPin = 18; // PWM servo - Broadcom pin 18, P1 pin 12
+#define ServoPin 4
 
 int initServo(){
   if (wiringPiSetupGpio() == -1) // Initialize wiringPi -- using Broadcom pin numbers
@@ -11,23 +11,26 @@ int initServo(){
 
 void styloUp()
 {
-  pinMode(pwmPin, PWM_OUTPUT);
-  pwmSetMode(PWM_MODE_MS);
-  pwmSetClock(1920); //clock at 50kHz (20us tick)
-  pwmSetRange(200); //range at 1000 ticks (20ms)
-  pwmWrite(pwmPin, 10);
+  pinMode(ServoPin, OUTPUT);
+  int i;
+  for (i = 0; i < 20; i++) {
+    digitalWrite(ServoPin,HIGH);
+    usleep(1000);
+    digitalWrite(ServoPin,LOW);
+    usleep(19000);
+  }
+  pinMode(ServoPin, INPUT);
 }
 
 void styloDown()
 {
-  pinMode(pwmPin, PWM_OUTPUT);
-  pwmSetMode(PWM_MODE_MS);
-  pwmSetClock(1920); //clock at 50kHz (20us tick)
-  pwmSetRange(200); //range at 1000 ticks (20ms)
-  pwmWrite(pwmPin, 20);
-}
-
-void styloDetach()
-{
-  pinMode(pwmPin, INPUT);
+  pinMode(ServoPin, OUTPUT);
+  int i;
+  for (i = 0; i < 20; i++) {
+    digitalWrite(ServoPin,HIGH);
+    usleep(2000);
+    digitalWrite(ServoPin,LOW);
+    usleep(18000);
+  }
+  pinMode(ServoPin, INPUT);
 }
