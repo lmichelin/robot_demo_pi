@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset = "utf-8" />
+   <title>Télécommande</title>
+  </head>
+  <body>
+
+    <div id="log">
+      <h1>Non supporté...</h1>
+    </div>
+    <div>
+      <a href="javascript:history.back()">Page précédente</a>
+    </div>
+
+
+<script>
+
+var lastExecution = Date.now();
+addEventListener("devicemotion", function (event) { // ou "deviceorientation" pour les angles
+  var now = Date.now();
+  if (now - lastExecution < 100) return; // duree entre chaque actualisation en ms
+  lastExecution = now;
+  process(event);
+}, false);
+
+function process(event) {
+  //var x = event.accelerationIncludingGravity.x;
+  var turn = Math.round(event.accelerationIncludingGravity.y*13);
+  var speed = Math.round(event.accelerationIncludingGravity.z*13);
+  //var alpha = event.alpha;
+  //var speed = Math.round(event.beta);
+  //var turn = Math.round(event.gamma);
+  document.getElementById("log").innerHTML = "<h1>Speed : " + speed + "</h1><h1>Turn : " + turn + "</h1>";
+  var request = new XMLHttpRequest();
+	request.open("GET", "script.php?params=" + speed + " " + turn);
+	request.send(null);
+}
+
+</script>
+
+  </body>
+</html>

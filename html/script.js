@@ -1,9 +1,9 @@
 function action(){
-  playtext("à vos ordres, c’est parti !");
   var phrase = document.getElementById("phrase").value;
   var taille = document.getElementById("taille").value;
   var request = new XMLHttpRequest();
   if (document.getElementById("buttonAction").innerHTML == "Action !!") {
+    playsound("processing.mp3");
     request.onreadystatechange = function() {
       if (request.readyState == 4) {
         document.getElementById("buttonAction").className = "btn btn-success btn-lg";
@@ -11,7 +11,7 @@ function action(){
         batteryUpdate();
         playsound("tada.mp3");
       }
-    }
+    };
   	request.open("GET", "script.php?letters=" + taille + " " + phrase);
   	request.send(null);
     document.getElementById("buttonAction").className = "btn btn-danger btn-lg";
@@ -34,7 +34,7 @@ function batteryUpdate(){
     if (battery.readyState == 4) {
       document.getElementById("battery").innerHTML = battery.response;
     }
-  }
+  };
   battery.open("GET", "script.php?battery");
   battery.send(null);
   document.getElementById("phrase").focus();
