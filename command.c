@@ -16,51 +16,89 @@ unsigned char buf[2];										// Buffer for data being read/ written on the i2c
 
 int main(int argc, char const *argv[]) {
 
-  if (argc != 3) return 1;
+  if ((fd = open(fileName, O_RDWR)) < 0) {					// Open port for reading and writing
+    printf("Failed to open i2c port\n");
+    exit(1);
+  }
 
-  int speed = atoi(argv[1]);
-  int turn = atoi(argv[2]);
+  if (ioctl(fd, I2C_SLAVE, address) < 0) {					// Set the port options and set the address of the device we wish to speak to
+    printf("Unable to get bus access to talk to slave\n");
+    exit(1);
+  }
 
-  if (speed>127) speed=127;
-  else if (speed<-128) speed=-128;
-  if (turn>127) turn=127;
-  else if (turn<-128) turn=-128;
+  if (argc == 3) // si on est dans le mode 3 et qu'on veut commander le robot
+  {
 
-  if (speed+turn>127 || speed-turn>127) speed=127-turn;
-  else if (speed+turn<-127 || speed-turn<-127) speed=-127-turn;
+    int speed = atoi(argv[1]);
+    int turn = atoi(argv[2]);
 
-	if ((fd = open(fileName, O_RDWR)) < 0) {					// Open port for reading and writing
-		printf("Failed to open i2c port\n");
-		exit(1);
-	}
+    if (speed>127) speed=127;
+    else if (speed<-128) speed=-128;
+    if (turn>127) turn=127;
+    else if (turn<-128) turn=-128;
 
-	if (ioctl(fd, I2C_SLAVE, address) < 0) {					// Set the port options and set the address of the device we wish to speak to
-		printf("Unable to get bus access to talk to slave\n");
-		exit(1);
-	}
+    if (speed+turn>127) speed=127-turn;
+    else if (speed-turn>127) speed=127+turn;
+    else if (speed+turn<-127) speed=-127-turn;
+    else if (speed-turn<-127) speed=-127+turn;
 
-  buf[0] = 15;												// This is the register we wish to write mode
-  buf[1] = 3;                         // Set mode 3
+  	buf[0] = 0;
+    buf[1] = speed;
 
-	if ((write(fd, buf, 2)) != 2) {								// Send mode
-		printf("Error writing to i2c slave\n");
-		exit(1);
-	}
+    if ((write(fd, buf, 2)) != 2) {
+  		printf("Error writing to i2c slave\n");
+  		exit(1);
+  	}
 
-	buf[0] = 0;
-  buf[1] = speed;
+    buf[0] = 1;
+    buf[1] = turn;
 
-  if ((write(fd, buf, 2)) != 2) {
-		printf("Error writing to i2c slave\n");
-		exit(1);
-	}
+  	if ((write(fd, buf, 2)) != 2) {
+  		printf("Error writing to i2c slave\n");
+  		exit(1);
+  	}
+    return 0;
+  }
 
-  buf[0] = 1;
-  buf[1] = turn;
+  else if (argc == 2) // si on veut changer de mode
+  {
+    int mode = atoi(argv[1]);
 
-	if ((write(fd, buf, 2)) != 2) {
-		printf("Error writing to i2c slave\n");
-		exit(1);
-	}
-  return 0;
+    buf[0] = 15;												// This is the register we wish to write mode
+    buf[1] = mode;                         // Set mode 3
+
+  	if ((write(fd, buf, 2)) != 2) {								// Send mode
+  		printf("Error writing to i2c slave\n");
+  		exit(1);
+  	}
+    return 0;
+  }
+  else if (argc == 1) // si on veut s'arreter
+  {
+    buf[0] = 15;												// This is the register we wish to write mode
+    buf[1] = 3;                         // Set mode 3
+
+  	if ((write(fd, buf, 2)) != 2) {								// Send mode
+  		printf("Error writing to i2c slave\n");
+  		exit(1);
+  	}
+
+    buf[0] = 0;
+    buf[1] = 0;
+
+    if ((write(fd, buf, 2)) != 2) {
+  		printf("Error writing to i2c slave\n");
+  		exit(1);
+  	}
+
+    buf[0] = 1;
+    buf[1] = 0;
+
+  	if ((write(fd, buf, 2)) != 2) {
+  		printf("Error writing to i2c slave\n");
+  		exit(1);
+  	}
+    return 0;
+  }
+  return 1;
 }

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
+  <title>ENSTAR - Télécommande</title>
+</head>
+
+<body background="background.jpg" onload="initMode()">
+  <div class="text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <br>
+          <img class="img-fluid mx-auto" src="logo-enstar.png">
+          <p>
+            <h2 class="text-white">Pilotez-le avec votre smartphone !</h2>
+          </p>
+        </div>
+        <div class="col-sm-6">
+          <div id="speed">Non supporté par votre appareil...</div>
+        </div>
+        <div class="col-sm-6">
+          <div id="turn"></div>
+        </div>
+        <div class="col-sm-12">
+          <button class="btn btn-secondary" onclick="stop()">Revenir à la page précédente</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+
+function initMode() {
+  var request = new XMLHttpRequest();
+  request.open("GET", "script.php?params=3");
+	request.send(null);
+}
+
+function stop() {
+  history.go(-1);
+  var request = new XMLHttpRequest();
+  request.open("GET", "script.php?params");
+	request.send(null);
+}
+
+var lastExecution = Date.now();
+addEventListener("devicemotion", function (event) {
+  var now = Date.now();
+  if (now - lastExecution < 100) return; // duree entre chaque actualisation en ms
+  lastExecution = now;
+  process(event);
+}, false);
+
+var maxvar = 20;
+var prev_turn = 0;
+var prev_speed = 0;
+function process(event) {
+  var turn = Math.round(event.accelerationIncludingGravity.y*7);
+  var speed = Math.round(event.accelerationIncludingGravity.z*14);
+  if (turn > prev_turn + maxvar) turn = prev_turn + maxvar;
+  else if (turn < prev_turn - maxvar) turn = prev_turn - maxvar;
+  if (speed > prev_speed + maxvar) speed = prev_speed + maxvar;
+  else if (speed < prev_speed - maxvar) speed = prev_speed - maxvar;
+  prev_turn = turn;
+  prev_speed = speed;
+
+  document.getElementById("speed").innerHTML = "<h3>Vitesse : " + speed + "</h3>";
+  document.getElementById("turn").innerHTML = "<h3>Rotation : " + turn + "</h3>";
+  var request = new XMLHttpRequest();
+	request.open("GET", "script.php?params=" + speed + " " + turn);
+	request.send(null);
+}
+
+</script>
+
+</body>
+</html>

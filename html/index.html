@@ -1,43 +1,127 @@
+<!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="font-awesome.min.css" rel="stylesheet" type="text/css">
-  <link href="bootstrap-4.0.0-alpha.6.css" rel="stylesheet" type="text/css">
+  <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
   <title>ENSTAR - Robot de démonstration</title>
 </head>
 
 <body background="background.jpg" onload="document.getElementById('phrase').focus(); batteryUpdate(); playsound('surprised.mp3')">
-  <div class="text-center d-flex h-100 align-items-center">
+  <div class="text-center">
     <div class="container">
       <div class="row">
-        <div class="col-md-12"><img class="img-fluid mx-auto" src="logo-enstar.png"></div>
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
+        <div class="col-sm-12">
+          <br>
+          <img class="img-fluid mx-auto" src="logo-enstar.png">
           <p>
-            <h1 class="text-white">Que voulez-vous que j’écrive ?</h1>
+            <h1 class="text-white">Que voulez-vous que j’écrive&nbsp;?</h1>
           </p>
-          <div class="col-md-12">
-            <div class="form-group">
-              <input id="phrase" class="form-control" onkeypress="if (event.keyCode==13) action();" placeholder="Votre phrase...">
-            </div>
-            <div class="form-group">
-              <label for="ex1">Hauteur du texte (cm) :</label>
-              <input id="taille" style="width: 200px; margin: auto;" type="number" class="form-control" onkeypress="if (event.keyCode==13) action();" value="10" placeholder="Hauteur du texte (cm)">
-            </div>
-            <p><button id="buttonAction" onclick="action()" class="btn btn-success btn-lg">Action !!</button></p>
-            <p>Tension de la batterie : <strong id="battery"></strong> Volts <button onclick="batteryUpdate()" class="btn btn-sm">Actualiser</button></p>
-            <p><button class="btn btn-sm"><a href="command">Piloter le robot avec son smartphone</a></button></p>
-            <button id="shutdownButton" onclick="shutdown()" class="btn btn-danger btn-sm">Éteindre le Raspberry Pi</button>
+          <div class="form-group">
+            <input id="phrase" class="form-control" onkeypress="if (event.keyCode==13) action();" placeholder="Votre phrase...">
           </div>
+          <div class="form-group">
+            <label for="ex1">Hauteur du texte (cm) :</label>
+            <input id="taille" style="width: 200px; margin: auto;" type="number" class="form-control" onkeypress="if (event.keyCode==13) action();" value="10" placeholder="Hauteur du texte (cm)">
+          </div>
+          <p><button id="buttonAction" onclick="action()" class="btn btn-success btn-lg">Action !!</button></p>
+          <p>Tension de la batterie : <strong id="battery">--</strong> Volts <button id="batteryButton" onclick="batteryUpdate()" class="btn btn-sm">Actualiser</button></p>
+          <p><button class="btn btn-secondary" onclick="command()">Piloter le robot avec son smartphone</button></p>
+          <button id="shutdownButton" onclick="shutdown()" class="btn btn-danger btn-sm">Éteindre le Raspberry Pi</button>
         </div>
       </div>
     </div>
   </div>
 
-<script src="script.js"></script>
+<script>
+
+function action(){
+  var phrase = document.getElementById("phrase").value;
+  var taille = document.getElementById("taille").value;
+  var request = new XMLHttpRequest();
+  if (document.getElementById("buttonAction").innerHTML == "Action !!") {
+    playsound("processing.mp3");
+    request.onreadystatechange = function() {
+      if (request.readyState == 4) {
+        document.getElementById("buttonAction").className = "btn btn-success btn-lg";
+        document.getElementById("buttonAction").innerHTML = "Action !!";
+        batteryUpdate();
+        playsound("tada.mp3");
+      }
+    };
+  	request.open("GET", "script.php?letters=" + taille + " " + phrase);
+  	request.send(null);
+    document.getElementById("buttonAction").className = "btn btn-danger btn-lg";
+    document.getElementById("buttonAction").innerHTML = "Stop";
+    document.getElementById("phrase").value = "";
+    document.getElementById("phrase").focus();
+  }
+  else if (document.getElementById("buttonAction").innerHTML == "Stop") {
+    stop();
+    document.getElementById("phrase").value = "";
+    document.getElementById("phrase").focus();
+  }
+}
+
+function command() {
+  stop();
+  document.location.href="command.html";
+}
+
+function stop() {
+  var req = new XMLHttpRequest();
+  req.onreadystatechange = function() {
+    if (req.readyState == 4) {
+      var req2 = new XMLHttpRequest();
+      req2.open("GET", "script.php?params");
+      req2.send(null);
+    }
+  };
+  req.open("GET", "script.php?kill");
+  req.send(null);
+}
+
+function batteryUpdate(){
+  var battery = new XMLHttpRequest();
+  battery.onreadystatechange = function() {
+    if (battery.readyState == 4) {
+      document.getElementById("battery").innerHTML = battery.response;
+      document.getElementById("batteryButton").className = "btn btn-sm";
+    }
+  };
+  document.getElementById("batteryButton").className = "btn btn-danger btn-sm";
+  battery.open("GET", "script.php?battery");
+  battery.send(null);
+  //document.getElementById("phrase").focus();
+}
+
+function shutdown(){
+  if (confirm("Voulez-vous vraiment éteindre le Raspberry Pi ?"))
+  {
+    document.getElementById("shutdownButton").innerHTML = "Ordre d'arrêt envoyé, arrêt en cours...";
+    var reqshutdown = new XMLHttpRequest();
+    reqshutdown.open("GET", "script.php?arret");
+  	reqshutdown.send(null);
+  }
+}
+
+function playtext(text)
+{
+  var reqtext = new XMLHttpRequest();
+  reqtext.open("GET", "script.php?text=" + text);
+  reqtext.send(null);
+}
+
+function playsound(sound)
+{
+  var reqsound = new XMLHttpRequest();
+  reqsound.open("GET", "script.php?sound=" + sound);
+  reqsound.send(null);
+}
+
+</script>
 
 </body>
 
