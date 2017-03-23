@@ -1,3 +1,7 @@
+/*
+Script utilisé dans le cas d'une commande via l'accéléromètre du smartphone
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <linux/i2c-dev.h>

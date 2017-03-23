@@ -9,7 +9,8 @@
   <title>ENSTAR - Robot de démonstration</title>
 </head>
 
-<body background="background.jpg" onload="document.getElementById('phrase').focus(); batteryUpdate(); playsound('surprised.mp3')">
+<!-- <body background="background.jpg" onload="document.getElementById('phrase').focus(); batteryUpdate(); playsound('surprised.mp3')"> -->
+<body background="background.jpg" onload="batteryUpdate(); playsound('surprised.mp3')">
   <div class="text-center">
     <div class="container">
       <div class="row">
@@ -56,12 +57,12 @@ function action(){
     document.getElementById("buttonAction").className = "btn btn-danger btn-lg";
     document.getElementById("buttonAction").innerHTML = "Stop";
     document.getElementById("phrase").value = "";
-    document.getElementById("phrase").focus();
+    //document.getElementById("phrase").focus();
   }
   else if (document.getElementById("buttonAction").innerHTML == "Stop") {
     stop();
     document.getElementById("phrase").value = "";
-    document.getElementById("phrase").focus();
+    //document.getElementById("phrase").focus();
   }
 }
 

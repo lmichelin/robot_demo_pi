@@ -1,3 +1,7 @@
+/*
+Script utilisé pour monter/descendre le servo dans le cas d'une commande via l'accéléromètre du smartphone
+*/
+
 #include "servo.h"
 
 int main(int argc, char const *argv[]) {

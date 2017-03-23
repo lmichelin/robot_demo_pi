@@ -1,9 +1,14 @@
+/*
+Script utilisé pour écrire ce que demande l'utilisateur
+
+Syntaxe pour l'éxécution : sudo ./main.x 20 ma phrase
+*/
+
 #include "servo.h"
 #include "motor.h"
 #include "pid.h"
 #include "letters.h"
 
-//syntaxe pour l'éxécution : sudo ./main.x 20 ma phrase
 
 int main(int argc, char const *argv[])
 {
@@ -29,7 +34,7 @@ int main(int argc, char const *argv[])
     {
       writeLetter(argv[i][j], letter_size);
     }
-    writeLetter(' ', letter_size);
+    writeLetter(' ', letter_size); // space between words
   }
 
   return 0;

@@ -69,19 +69,26 @@ function stop() {
 }
 
 var lastExecution = Date.now();
-addEventListener("devicemotion", function (event) {
+addEventListener("deviceorientation", function (event) {
   var now = Date.now();
   if (now - lastExecution < 100) return; // duree entre chaque actualisation en ms
   lastExecution = now;
   process(event);
 }, false);
 
-var maxvar = 20;
+var seuil = 6;
+var maxvar = 200;
 var prev_turn = 0;
 var prev_speed = 0;
 function process(event) {
-  var turn = Math.round(event.accelerationIncludingGravity.y*7);
-  var speed = Math.round(event.accelerationIncludingGravity.z*14);
+  var beta = event.beta;
+  var gamma = event.gamma;
+  if (-seuil < beta && beta < seuil) beta = 0;
+  else beta -= seuil * Math.sign(beta);
+  if (-seuil < gamma && gamma < seuil) gamma = 0;
+  else gamma -= seuil * Math.sign(gamma);
+  var speed = Math.round(-beta*3);
+  var turn = Math.round(gamma*2);
   if (turn > prev_turn + maxvar) turn = prev_turn + maxvar;
   else if (turn < prev_turn - maxvar) turn = prev_turn - maxvar;
   if (speed > prev_speed + maxvar) speed = prev_speed + maxvar;

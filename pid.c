@@ -1,16 +1,20 @@
+/*
+Script contenant le PID du robot ainsi que les fonctions translate, rotate et courbe
+*/
+
 #include "pid.h"
 #include "motor.h"
 #include <math.h>
 
-#define voie 111.5 //voie/2 du robot (voie = distance entre les 2 roues d'un même essieu) en mm
+#define voie 111.5 //demi-voie du robot (voie = distance entre les 2 roues d'un même essieu) en mm
 
 #define dt 5000 //µs
 #define max_vit 180 // vitesse max comprise entre 128 et 254
 #define max_int 40 // max integral value
 #define max_acc 1 // max variation of output (acceleration)
-#define Kp 0.4
-#define Ki 0.1
-#define Kd 0.3
+#define Kp 0.4 // correcteur proportionnel
+#define Ki 0.1 // correcteur intégral
+#define Kd 0.3 // correcteur dérivé
 #define tolerance 0.0 //mm
 
 double previous_right_error = 0;
@@ -55,6 +59,11 @@ int updateLeftPid(double setpoint, double measured_value)
 }
 
 void translate(float mm)
+/*
+translation du robot : les deux roue tournent à la même vitesse
+le signe de mm détermine le sens d'avancement du robot (avant/arrière)
+seule la roue gauche est asservie via le PID, la roue droite est commandée à l'identique
+*/
 {
   double update = 0;
   double current_left = readLeftEncoderMilli();
@@ -78,6 +87,11 @@ stopMotors();
 }
 
 void rotate(float degre)
+/*
+rotation du robot : les deux roue tournent en sens opposé mais à la même vitesse
+le signe de degre détermine le sens de rotation (horaire/anti-horaire)
+seule la roue gauche est asservie via le PID, la roue droite est commandée en conséquence
+*/
 {
   double update = 0;
   double rad = degre * 0.0174533; //conversion degre > radian
@@ -102,6 +116,12 @@ stopMotors();
 }
 
 void courbe(float rayon, float degre)
+/*
+fonction permettant au robot d'effectuer une courbe
+le signe de degre détermine le sens de rotation (horaire/anti-horaire)
+le signe de rayon détermine le sens d'avancement du robot (avant/arrière)
+seule la roue extérieure du virage est asservie via le PID, l'autre est commandée en conséquence
+*/
 {
   double rad = degre * 0.0174533; //conversion degre > radian
   double current_right = readRightEncoderMilli();

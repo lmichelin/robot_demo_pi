@@ -323,14 +323,17 @@ void writeLetter(char letter, int letter_size) //letter_size = hauteur des lettr
     }
     case 'S': case 's':
     {
-      styloDown();
-      courbe(2.5*letter_size,-180);
-      courbe(2.5*letter_size,180);
-      styloUp();
-      translate(2.5*letter_size);
       rotate(-90);
-      translate(-10*letter_size);
+      translate(0.147*letter_size);
+      rotate(-71.47);
+      styloDown();
+      courbe(-2.574*letter_size,-180);
+      courbe(-2.574*letter_size,180);
+      styloUp();
+      rotate(71.47);
+      translate(-9.85281*letter_size);
       rotate(90);
+      translate(2.5*letter_size);
       break;
     }
     case 'T': case 't':

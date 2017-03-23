@@ -96,7 +96,7 @@ double readLeftEncoderMilli(){
 float readBatteryVoltage(){
 	buf[0] = 10;												// This is the register we wish to read battery voltage from
 
-	if ((write(fd, buf, 1)) != 1) {								// Send regiter to read software from from
+	if ((write(fd, buf, 1)) != 1) {								// Send regiter to read battery voltage from
 		printf("Error writing to i2c slave\n");
 		exit(1);
 	}

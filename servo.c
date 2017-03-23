@@ -1,3 +1,10 @@
+/*
+Script utilisé pour commander les servos
+Ce script utilise un pwm fabriqué à la main via une boucle for
+En effet on ne peut pas utiliser le pin pwm 18 car il est aussi connecté à la sortie son ^^
+Plus d'infos : http://wiringpi.com/pins/special-pin-functions/
+*/
+
 #include "servo.h"
 
 // Pin number declarations. We're using the Broadcom chip pin numbers.
