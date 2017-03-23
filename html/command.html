@@ -26,8 +26,14 @@
         <div class="col-sm-6">
           <div id="turn"></div>
         </div>
-        <div class="col-sm-12">
-          <button class="btn btn-secondary" onclick="stop()">Revenir à la page précédente</button>
+        <div class="col-sm-4">
+          <p><button class="btn btn-success" onclick="styloUp()">Relever le stylo</button></p>
+        </div>
+        <div class="col-sm-4">
+          <p><button class="btn btn-danger btn-lg" onclick="stop()">STOP</button></p>
+        </div>
+        <div class="col-sm-4">
+          <p><button class="btn btn-success" onclick="styloDown()">Baisser le stylo</button></p>
         </div>
       </div>
     </div>
@@ -42,7 +48,20 @@ function initMode() {
 	request.send(null);
 }
 
+function styloUp() {
+  var request = new XMLHttpRequest();
+  request.open("GET", "script.php?servo=up");
+	request.send(null);
+}
+
+function styloDown() {
+  var request = new XMLHttpRequest();
+  request.open("GET", "script.php?servo=down");
+	request.send(null);
+}
+
 function stop() {
+  lastExecution = Date.now() + 1000;
   history.go(-1);
   var request = new XMLHttpRequest();
   request.open("GET", "script.php?params");

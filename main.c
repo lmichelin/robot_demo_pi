@@ -18,7 +18,6 @@ int main(int argc, char const *argv[])
       return -1;
 
   styloUp();
-  usleep(400000);
 
   int letter_size = atoi(argv[1]);
 

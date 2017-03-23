@@ -13,11 +13,11 @@ void styloUp()
 {
   pinMode(ServoPin, OUTPUT);
   int i;
-  for (i = 0; i < 20; i++) {
+  for (i = 0; i < 10; i++) {
     digitalWrite(ServoPin,HIGH);
-    usleep(1000);
+    usleep(1100);
     digitalWrite(ServoPin,LOW);
-    usleep(19000);
+    usleep(18900);
   }
   pinMode(ServoPin, INPUT);
 }
@@ -28,9 +28,9 @@ void styloDown()
   int i;
   for (i = 0; i < 20; i++) {
     digitalWrite(ServoPin,HIGH);
-    usleep(2000);
+    usleep(1600);
     digitalWrite(ServoPin,LOW);
-    usleep(18000);
+    usleep(18400);
   }
   pinMode(ServoPin, INPUT);
 }
