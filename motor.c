@@ -81,13 +81,13 @@ long readLeftEncoder() {
 	return encoder;
 }
 
-double readRightEncoderMilli(){
+double readRightEncoderMilli(){ // retourne une valeur en mm
 	double val = readRightEncoder() / 1.56;
 	//printf("Right encoder %lf mm\n", val);
 	return val;
 }
 
-double readLeftEncoderMilli(){
+double readLeftEncoderMilli(){ // retourne une valeur en mm
 	double val = readLeftEncoder() / 1.56;
 	//printf("Left encoder %lf mm\n", val);
 	return val;

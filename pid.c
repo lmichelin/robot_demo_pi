@@ -120,7 +120,7 @@ void courbe(float rayon, float degre)
 fonction permettant au robot d'effectuer une courbe
 le signe de degre détermine le sens de rotation (horaire/anti-horaire)
 le signe de rayon détermine le sens d'avancement du robot (avant/arrière)
-seule la roue extérieure du virage est asservie via le PID, l'autre est commandée en conséquence
+seule la roue extérieure du virage est asservie via le PID, l'autre est commandée en conséquence en utilisant le nombre coeff
 */
 {
   double rad = degre * 0.0174533; //conversion degre > radian
