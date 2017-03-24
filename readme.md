@@ -21,7 +21,8 @@ Il est également possible de piloter le robot via l'accéléromètre du smartph
 ## Configuration initiale
 
 - Dans `/etc/network/interfaces` configurer `wlan0` comme suit :
-```
+
+```bash
 allow-hotplug wlan0
 ```
 - Configurer le fichier `/etc/create_ap.conf` comme suit :
@@ -58,7 +59,8 @@ USE_PSK=0
 - activer le service create_ap : `sudo systemctl enable create_ap` (puis reboot)
 - Apache2 : créer un symlink `html -> home/pi/robot_demo_pi/html/` dans `/var/www/`
 - exécuter `sudo visudo` et ajouter la ligne suivante pour autoriser www-data à exécuter les scripts :
-```
+
+```bash
 www-data ALL=(ALL) NOPASSWD:/home/pi/robot_demo_pi/scripts/*.sh
 ```
 
