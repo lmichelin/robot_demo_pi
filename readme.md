@@ -25,6 +25,7 @@ Il est également possible de piloter le robot via l'accéléromètre du smartph
 allow-hotplug wlan0
 ```
 - Configurer le fichier `/etc/create_ap.conf` comme suit :
+
 ```bash
 CHANNEL=default
 GATEWAY=10.0.1.1
