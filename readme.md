@@ -12,7 +12,7 @@ Il est également possible de piloter le robot via l'accéléromètre du smartph
 ## Prérequis
 
 - Distribution : Raspbian Jessie Lite
-- Module I2C du kernel activé : sudo raspi-config -> interfacing options
+- Module I2C du kernel activé : `sudo raspi-config -> interfacing options`
 - librairie wiringpi : http://wiringpi.com/download-and-install/
 - serveur Apache2 + php
 - paquets hostapd et dnsmasq + script create_ap pour le point d'accès Wi-Fi : https://github.com/oblique/create_ap
